@@ -31,6 +31,10 @@
     "es",
     "en"
   ],
+  "scripts": {
+    "check": "node --check index.js && node --check client.js",
+    "test": "node test/engine.test.mjs && node test/panel.test.mjs && node test/client.test.mjs"
+  },
   "license": "MIT",
   "dsh": {
     "bundle": {

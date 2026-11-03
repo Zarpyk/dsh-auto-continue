@@ -1,5 +1,7 @@
 # Continuación automática (ES / EN)
 
+[![check](https://github.com/Zarpyk/dsh-auto-continue/actions/workflows/ci.yml/badge.svg)](https://github.com/Zarpyk/dsh-auto-continue/actions/workflows/ci.yml)
+
 Mantiene una sesión de DeepSeek Harness en marcha cuando un turno termina antes de que el trabajo
 esté hecho, y pone un panel al estilo de Claude Code justo encima del compositor para que veas
 venir la continuación y puedas pararla.
@@ -255,6 +257,28 @@ El `POST` exige la cabecera `x-dsh-auto-continue: 1`; sin ella la ruta responde 
 Un error de longitud de contexto se trata como permanente a propósito: reintentarlo vuelve a
 fallar. Si ese caso debería compactar y luego continuar es una decisión de producto; este plugin
 deja la compactación en manos del plugin de compactación en vez de lanzarla en silencio.
+
+## Pruebas
+
+Todo es ESM puro sobre módulos nativos de Node, así que las suites corren sin instalar nada:
+
+```sh
+npm run check   # sintaxis de las dos mitades
+npm test        # 24 del motor + 14 de la API del panel + 9 de render
+```
+
+- `test/engine.test.mjs` conduce la mitad de host con un Host falso (agents, sessions, el flujo de
+  eventos) y comprueba cada decisión: qué finales continúan, cuáles se quedan quietos, topes,
+  espera exponencial, guardia de bucle, lista de errores permanentes, y que nuestro propio eco no
+  reinicie la racha.
+- `test/panel.test.mjs` ejercita el almacén en disco y las rutas HTTP de punta a punta con objetos
+  `Request`/`Response` reales — persistencia de la pausa, guardados con topes, la prueba, la orden
+  `/auto-continue` y su baja al desmontar.
+- `test/client.test.mjs` carga la mitad de navegador en un shim de React de ~40 líneas y comprueba
+  lo que dibujan la banda y la página de ajustes para los casos armado, en pausa, con tope, ruta
+  caída y prueba, incluidas las ventanas de Command Code.
+
+La CI ejecuta los mismos comandos en Node 22 y 24.
 
 ## Licencia
 

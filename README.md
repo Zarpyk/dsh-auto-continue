@@ -1,5 +1,7 @@
 # Auto-Continue (EN / ES)
 
+[![check](https://github.com/Zarpyk/dsh-auto-continue/actions/workflows/ci.yml/badge.svg)](https://github.com/Zarpyk/dsh-auto-continue/actions/workflows/ci.yml)
+
 Keeps a DeepSeek Harness session moving when a turn ends before the work is done, and puts a
 Claude-Code-style banner right above the composer so you can see it coming and call it off.
 
@@ -247,6 +249,27 @@ Both routes are behind the profile's HTTP carrier and require the mutation heade
 A context-length error is treated as permanent on purpose: retrying it just fails again. Whether
 that case should compact and then continue is a product decision, and this plugin leaves compaction
 to the compaction plugin rather than triggering it silently.
+
+## Tests
+
+Everything is plain ESM on Node built-ins, so the suites run without installing anything:
+
+```sh
+npm run check   # syntax of both halves
+npm test        # 24 engine + 14 panel API + 9 render assertions
+```
+
+- `test/engine.test.mjs` drives the host half with a fake Host context (agents, sessions, the event
+  feed) and asserts every decision: which endings continue, which stand down, caps, backoff, the
+  loop guard, the permanent-error list, our own echo not resetting the streak.
+- `test/panel.test.mjs` exercises the runtime store and the HTTP routes end to end over real
+  `Request`/`Response` objects — pause persistence, clamped saves, the drill, the `/auto-continue`
+  command and its disposal.
+- `test/client.test.mjs` loads the browser half into a ~40-line React shim and asserts what the
+  banner and the settings page render for armed, paused, capped, dead-route and drill payloads,
+  including the Command Code windows read-out.
+
+CI runs the same commands on Node 22 and 24.
 
 ## License
 
