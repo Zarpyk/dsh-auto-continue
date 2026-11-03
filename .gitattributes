@@ -1,0 +1,5 @@
+# Keep the line endings the tests were written against, on every platform.
+* text=auto eol=lf
+
+*.png binary
+*.svg text

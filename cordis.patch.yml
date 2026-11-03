@@ -1,0 +1,6 @@
+# Inserts the host-side engine. `config` is optional: every field has a default,
+# and the Settings page renders the same fields for editing.
+- insert:
+    - id: dsh-auto-continue
+      name: '@zarpyk/dsh-auto-continue'
+      config: {}

@@ -1,0 +1,13 @@
+# Dependencies are never vendored: the bundle is plain ESM with no runtime dependencies.
+node_modules/
+
+# Local test artifacts (the throwaway harnesses that drive the host half and the client renderer).
+.tmp-asar/
+*.log
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/

@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Auto-Continue",
+    "description": "Keeps a session going when a turn stops early: continues after max-tokens, after a provider usage window, after a recoverable error and after an interrupted turn. Adds a banner above the composer, its own settings page and an /auto-continue command with a drill mode. English and Spanish."
+  }
+}

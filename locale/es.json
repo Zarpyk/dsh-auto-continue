@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Continuación automática",
+    "description": "Mantiene la sesión en marcha cuando un turno termina antes de tiempo: continúa tras max-tokens, tras una ventana de uso del proveedor, tras un error recuperable y tras un turno interrumpido. Añade una banda sobre el compositor, su propia página de ajustes y la orden /auto-continue con modo de prueba. Español e inglés."
+  }
+}

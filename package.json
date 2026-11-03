@@ -1,0 +1,48 @@
+{
+  "name": "@zarpyk/dsh-auto-continue",
+  "version": "1.3.0",
+  "private": true,
+  "description": "Bilingual (English/Spanish) auto-continue for the DeepSeek Harness: resumes turns that stopped on max-tokens, on a recoverable error, on a provider usage window, or on an interrupted turn. Ships a composer banner, a settings page with the Command Code usage windows and credit left, and an /auto-continue command with a drill mode.",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "README.es.md"
+  ],
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "cordis",
+    "plugin",
+    "auto-continue",
+    "command",
+    "es",
+    "en"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-slots",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-api-remotes"
+      ]
+    }
+  }
+}
